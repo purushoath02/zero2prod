@@ -1,15 +1,26 @@
-use axum::response::Html;
+use axum::{
+    body::Body,
+    http::StatusCode,
+    response::{IntoResponse, Response},
+};
 use axum::{routing::get, Router};
+use std::net::SocketAddr;
+use std::net::{IpAddr, Ipv4Addr};
 use tokio::net::TcpListener;
+use zero2pod::run;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
-    let app = Router::new().route("/", get(|| health_check()));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
-    axum::serve(listener, app).await.unwrap();
+    let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
+    let address = listener.local_addr().unwrap().to_string();
+    println!("{:?}", address);
+    let _ = run(listener).await?;
     Ok(())
 }
-
-async fn health_check() -> Html<&'static str> {
-    Html("<h1>Hello, world!</h1>")
-}
+// async fn health_check() -> Response {
+//     Response::builder()
+//         .status(StatusCode::OK)
+//         .header("x-foo", "header")
+//         .body(Body::from("Health is okay"))
+//         .unwrap()
+// }
