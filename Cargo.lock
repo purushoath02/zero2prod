@@ -1814,6 +1814,7 @@ dependencies = [
  "http 0.2.12",
  "hyper 1.4.1",
  "reqwest 0.12.7",
+ "serde",
  "tokio",
  "tower 0.5.0",
 ]

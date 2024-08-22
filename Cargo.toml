@@ -6,12 +6,12 @@ edition = "2021"
 [dependencies]
 
 reqwest = "0.12.7"
-axum = "0.7"                                   # or latest version
+axum = "0.7"                                           # or latest version
 hyper = { version = "1", features = ["full"] }
 tokio = { version = "1", features = ["full"] }
 http = "0.2"
 axum-test-helper = "0.*"
-
+serde = { version = "1.0.208", features = ["derive"] }
 tower = { version = "0.5", features = ["util"] }
 
 [lib]
