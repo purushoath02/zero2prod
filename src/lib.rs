@@ -12,7 +12,7 @@ use axum::{routing::get, Router};
 use tokio::net::TcpListener;
 
 #[derive(serde::Deserialize)]
-pub struct userdata {
+pub struct UserData {
     username: String,
     email: String,
 }
@@ -33,7 +33,7 @@ async fn health_check() -> Response {
         .body(Body::from("Health is okay"))
         .unwrap()
 }
-async fn subscribe() -> impl IntoResponse {
+async fn subscribe(form: Form<UserData>) -> impl IntoResponse {
     println!("subscribed");
     StatusCode::OK
 }
@@ -44,6 +44,6 @@ pub fn app() -> std::io::Result<Router> {
     Ok(app)
 }
 
-pub fn index(Form(form): Form<userdata>) -> String {
+pub fn index(Form(form): Form<UserData>) -> String {
     format!("welcome {}", form.username)
 }

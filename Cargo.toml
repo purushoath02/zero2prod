@@ -14,5 +14,17 @@ axum-test-helper = "0.*"
 serde = { version = "1.0.208", features = ["derive"] }
 tower = { version = "0.5", features = ["util"] }
 
+[dependencies.sqlx]
+features = [
+    "runtime-actix-rustls",
+    "macros",
+    "postgres",
+    "uuid",
+    "chrono",
+    "migrate",
+]
+version = "0.5.7"
+default-features = false
+
 [lib]
 path = "src/lib.rs"
